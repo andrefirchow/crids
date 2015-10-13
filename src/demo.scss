@@ -1,0 +1,261 @@
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+body {
+  margin: 0;
+  background: #f5f5f5;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+header {
+	background: #fff;
+	padding: 40px 0;
+	margin-bottom: 40px;
+	border-bottom: 1px solid #ccc;
+}
+
+h1, h2, h3 {
+	font-weight: 300;
+	text-align: center;
+
+	small {
+		opacity: .6;
+	}
+
+}
+
+hr {
+    margin: 30px 0;
+    height: 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.wrapper {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.page-info {
+	background: #fff;
+	padding: 30px 0 60px 0;
+	margin-top: 40px;
+	border-top: 1px solid #ccc;
+}
+
+
+.grid-example {
+  background: tomato;
+  color: white;
+  height: 80px;
+  line-height: 80px;
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 0 5px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  // width: 100%;
+  text-overflow: ellipsis;
+
+  .row .row & {
+    background: indianred;
+  }
+
+  .row .row .row & {
+    background: salmon;
+  }
+
+  .row .row .row .row & {
+    background: darksalmon;
+  }
+
+}
+
+a {
+	color: dodgerblue;
+
+	&:hover {
+		color: black;
+	}
+}
+
+.page-footer {
+	background: #333;
+	padding: 20px 0 30px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 2px;
+    background: dodgerblue;
+    color: #fff !important;
+    text-decoration: none;
+    margin: 10px;
+    margin-left: 0;
+
+    &:hover {
+        background: darken(dodgerblue, 10%);
+    }
+
+}
+
+.btn-ghost {
+    @extend .btn;
+    background: transparent;
+    color: dodgerblue !important;
+    border: 1px solid dodgerblue;
+
+    &:hover {
+        background: dodgerblue;
+        color: #fff !important;
+    }
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.footer-nav {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  li {
+    display: inline-block;
+    margin-right: 30px;
+  }
+
+  a {
+    color: #999;
+
+    &:hover {
+      color: #fff;
+    }
+
+  }
+
+}
+
+// table
+
+table {
+	border-collapse: collapse;
+  border-spacing: 0;
+	width: 100%;
+	margin: 0 0 40px 0;
+  font-size: 14px;
+
+    th,
+    td {
+    	text-align: left;
+    	padding: 8px;
+      border: 1px solid #ccc;
+      text-align: left !important;
+
+        &:empty {
+            border: none;
+        }
+    }
+
+    thead tr:last-child th {
+        border-bottom-width: 2px;
+    }
+
+    tbody tr th:last-of-type {
+        border-right-width: 2px;
+    }
+
+	tbody tr:nth-of-type(odd) {
+        background-color: #f5f5f5;
+    }
+
+}
+
+
+.table-responsive {
+
+    @media (max-width: 900px) {
+
+        display: block;
+        overflow: hidden;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        font-size: 13px;
+
+        table {
+        	margin: 0;
+          border-bottom: 1px solid #ccc;
+        }
+
+        thead, 
+        tbody, 
+        th, 
+        td, 
+        tr {
+          display: block;
+          overflow: hidden;
+          border: none;
+        }
+
+        thead {
+          tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+          }
+        }
+
+        tr:nth-child(odd) {
+          background-color: #f5f5f5;
+          border-top: 1px solid #ccc;
+          border-bottom: 1px solid #ccc;
+        }
+
+        td {
+          padding: 0.25em 0.5em;
+          
+          &:before {
+            content: attr(data-label)": ";
+            display: inline-block;
+            font-weight: 700;
+            margin-right: 3px;
+          }
+
+        }
+
+        .small {
+            font-size: inherit;
+        }
+    }
+
+}
+
+.nav {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 40px;
+  list-style-type: none;
+
+  > li {
+    display: inline-block;
+  }
+
+  a {
+    @extend .btn-ghost;
+  }
+
+}
+
+
+.text-highlight {
+  color: firebrick;
+}

@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CRIDS - customizable grid system</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/crids_full-12-_debug.css">
+        <link rel="stylesheet" href="css/demo.css">
+
+    </head>
+    <body class="demo">
+
+        <header>
+            <h1>CRIDS <small><b>c</b>ustomizable g<b>rid</b> <b>s</b>ystem</small></h1>
+
+            <div class="wrapper">
+                <p>
+                    CRIDS is a responsive, mobile first, fluid, nestable, sass-based grid system for advanced usage.
+                    It comes with 12 columns by default and several grid options, which can be separately enabled inside the scss-file.
+                    CRIDS is fully customizable to get just the code you need and the classnames you want. Simply reduce file size and eliminate unneccesary CSS, it all results in your own small grid system. Have fun.
+                </p>
+                <div class="text-center">
+                    <a href="#" class="btn">view on github</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="wrapper">
+
+            <h2>12 columns default</h2>
+            <div class="row">
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+                <div class="col col-s-1"><div class="grid-example">col</div></div>
+            </div>
+
+            <h2>simple</h2>
+            <div class="row">
+                <div class="col col-s-4 col-m-6 col-l-4"><div class="grid-example">col</div></div>
+                <div class="col col-s-8 col-m-6 col-l-4"><div class="grid-example">col</div></div>
+                <div class="col col-m-6 col-l-4"><div class="grid-example">col</div></div>
+                <div class="col col-m-6"><div class="grid-example">col</div></div>
+                <div class="col col-l-6"><div class="grid-example">col</div></div>
+            </div>
+
+            <h2>prepend</h2>
+            <div class="row">
+                <div class="col col-s-4">
+                    <div class="grid-example">col</div>
+                </div>
+                <div class="col col-s-2 prepend-2">
+                    <div class="grid-example">prepend 2</div>
+                </div>
+                <div class="col col-s-4">
+                    <div class="grid-example">col</div>
+                </div>
+            </div>
+
+            <h2>append</h2>
+            <div class="row">
+                <div class="col col-s-4">
+                    <div class="grid-example">col</div>
+                </div>
+                <div class="col col-s-2 append-2">
+                    <div class="grid-example">append 2</div>
+                </div>
+                <div class="col col-s-4">
+                    <div class="grid-example">col</div>
+                </div>
+            </div>
+
+            <h2>push/pull columns</h2>
+            <div class="row">
+                <div class="col col-s-4 s-push-8">
+                    <div class="grid-example">1st col</div>
+                </div>
+                <div class="col col-s-8 s-pull-4">
+                    <div class="grid-example">2nd col</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-s-6 col-l-4 l-push-8">
+                    <div class="grid-example">1st col (push large)</div>
+                </div>
+                <div class="col col-s-6 col-l-8 l-pull-4">
+                    <div class="grid-example">2nd col (pull large)</div>
+                </div>
+            </div>
+
+            <h2>nested</h2>
+            <div class="row">
+                <div class="col col-m-4">
+                    <div class="row">
+                        <div class="col col-s-4">
+                            <div class="grid-example">col</div>
+                        </div>
+                        <div class="col col-s-8">
+                            <div class="grid-example">col</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-m-4"><div class="grid-example">col</div></div>
+                <div class="col col-m-4"><div class="grid-example">col</div></div>
+            </div>
+
+            <h2>collapse</h2>
+            <div class="row collapse">
+                <div class="col col-s-4"><div class="grid-example">col</div></div>
+                <div class="col col-s-4"><div class="grid-example">col</div></div>
+                <div class="col col-s-4"><div class="grid-example">col</div></div>
+            </div>
+
+            <h2>uncollapse</h2>
+            <div class="row collapse s-uncollapse">
+                <div class="col col-s-3"><div class="grid-example">col (s-uncollapse)</div></div>
+                <div class="col col-s-3"><div class="grid-example">col (s-uncollapse)</div></div>
+                <div class="col col-s-6"><div class="grid-example">col (s-uncollapse)</div></div>
+            </div>
+            <div class="row collapse m-uncollapse">
+                <div class="col col-s-2 col-m-4"><div class="grid-example">col (m-uncollapse)</div></div>
+                <div class="col col-s-6 col-m-2"><div class="grid-example">col (m-uncollapse)</div></div>
+                <div class="col col-s-4 col-m-6"><div class="grid-example">col (m-uncollapse)</div></div>
+            </div>
+            <div class="row collapse l-uncollapse">
+                <div class="col col-m-4"><div class="grid-example">col</div></div>
+                <div class="col col-s-6 col-m-2"><div class="grid-example">col</div></div>
+                <div class="col col-s-6"><div class="grid-example">col</div></div>
+            </div>
+
+            <h2>center</h2>
+            <div class="row center">
+                <div class="col col-m-3"><div class="grid-example">col</div></div>
+                <div class="col col-m-3"><div class="grid-example">col</div></div>
+                <div class="col col-m-3"><div class="grid-example">col</div></div>
+            </div>
+
+        </div>
+
+        <div class="page-info">
+            <div class="wrapper">
+
+                <h2>Test pages</h2>
+                <nav>
+                    <ul class="nav text-center">
+                        <li><a href="test/test_nested.html">nested</a></li>
+                        <li><a href="test/test_append.html">append</a></li>
+                        <li><a href="test/test_prepend.html">prepend</a></li>
+                        <li><a href="test/test_center.html">center</a></li>
+                        <li><a href="test/test_push-pull.html">push/pull</a></li>
+                        <li><a href="test/test_collapse.html">collapse</a></li>
+                        <li><a href="test/test_hide.html">hide</a></li>
+                        <li><a href="test/test_layout.html">layout</a></li>
+                    </ul>
+                </nav>
+
+                <h2>Example options &amp; file sizes</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>desc</th>
+                                <th>columns</th>
+                                <th>push/pull</th>
+                                <th>append</th>
+                                <th>prepend</th>
+                                <th>collapse</th>
+                                <th>center</th>
+                                <th>hide</th>
+                                <th>breakpoints</th>
+                                <th>custom cols</th>
+                                <th>size (.min)</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+
+                            <tr>
+                                <td data-label="desc">mini-12</td>
+                                <td data-label="columns">12</td>
+                                <td data-label="push/pull">no</td>
+                                <td data-label="append">no</td>
+                                <td data-label="prepend">no</td>
+                                <td data-label="collapse">no</td>
+                                <td data-label="center">no</td>
+                                <td data-label="hide">no</td>
+                                <td data-label="breakpoints">no</td>
+                                <td data-label="custom cols">yes</td>
+                                <td data-label="size" class="text-right text-highlight">436 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="desc">simple-12</td>
+                                <td data-label="columns">12</td>
+                                <td data-label="push/pull">no</td>
+                                <td data-label="append">no</td>
+                                <td data-label="prepend">no</td>
+                                <td data-label="collapse">no</td>
+                                <td data-label="center">no</td>
+                                <td data-label="hide">no</td>
+                                <td data-label="breakpoints">yes</td>
+                                <td data-label="custom cols">no</td>
+                                <td data-label="size" class="text-right text-highlight">1.165 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="desc">default-12</td>
+                                <td data-label="columns">12</td>
+                                <td data-label="push/pull">no</td>
+                                <td data-label="append">no</td>
+                                <td data-label="prepend">yes</td>
+                                <td data-label="collapse">yes</td>
+                                <td data-label="center">yes</td>
+                                <td data-label="hide">yes</td>
+                                <td data-label="breakpoints">yes</td>
+                                <td data-label="custom cols">no</td>
+                                <td data-label="size" class="text-right text-highlight">4.178 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="desc">full-12</td>
+                                <td data-label="columns">12</td>
+                                <td data-label="push/pull">yes</td>
+                                <td data-label="append">yes</td>
+                                <td data-label="prepend">yes</td>
+                                <td data-label="collapse">yes</td>
+                                <td data-label="center">yes</td>
+                                <td data-label="hide">yes</td>
+                                <td data-label="breakpoints">yes</td>
+                                <td data-label="custom cols">no</td>
+                                <td data-label="size" class="text-right text-highlight">8.324 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="desc">mini-24</td>
+                                <td data-label="columns">24</td>
+                                <td data-label="push/pull">no</td>
+                                <td data-label="append">no</td>
+                                <td data-label="prepend">no</td>
+                                <td data-label="collapse">no</td>
+                                <td data-label="center">no</td>
+                                <td data-label="hide">no</td>
+                                <td data-label="breakpoints">no</td>
+                                <td data-label="custom cols">no</td>
+                                <td data-label="size" class="text-right text-highlight">852 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="desc">simple-24</td>
+                                <td data-label="columns">24</td>
+                                <td data-label="push/pull">no</td>
+                                <td data-label="append">no</td>
+                                <td data-label="prepend">no</td>
+                                <td data-label="collapse">no</td>
+                                <td data-label="center">no</td>
+                                <td data-label="hide">no</td>
+                                <td data-label="breakpoints">yes</td>
+                                <td data-label="custom cols">no</td>
+                                <td data-label="size" class="text-right text-highlight">2.050 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="desc">default-24</td>
+                                <td data-label="columns">24</td>
+                                <td data-label="push/pull">no</td>
+                                <td data-label="append">no</td>
+                                <td data-label="prepend">yes</td>
+                                <td data-label="collapse">yes</td>
+                                <td data-label="center">yes</td>
+                                <td data-label="hide">yes</td>
+                                <td data-label="breakpoints">yes</td>
+                                <td data-label="custom cols">no</td>
+                                <td data-label="size" class="text-right text-highlight">7.056 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="desc">full-24</td>
+                                <td data-label="columns">24</td>
+                                <td data-label="push/pull">yes</td>
+                                <td data-label="append">yes</td>
+                                <td data-label="prepend">yes</td>
+                                <td data-label="collapse">yes</td>
+                                <td data-label="center">yes</td>
+                                <td data-label="hide">yes</td>
+                                <td data-label="breakpoints">yes</td>
+                                <td data-label="custom cols">no</td>
+                                <td data-label="size" class="text-right text-highlight">15.433 KB</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-center">
+                    <a href="index.html" class="btn-ghost">normal view</a>
+                </p>
+
+            </div>
+        </div>
+
+        <footer class="page-footer">
+            <div class="wrapper">
+                <ul class="footer-nav">
+                    <li><a href="https://twitter.com/AndreFirchow">@AndreFirchow</a></li>
+                    <li><a href="http://firchow.net/">Blog</a></li>
+                    <li><a href="https://github.com/andrefirchow/">Github</a></li>
+                </ul>
+            </div>
+        </footer>
+
+    </body>
+</html>

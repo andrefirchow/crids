@@ -1,0 +1,562 @@
+/*
+
+  CRIDS customizable grid system
+  by Andre Firchow - http://firchow.net
+
+/**********************************************************/
+
+
+$g-debug:					false !default;
+
+// main grid settings
+$g-cols-count: 				12 !default;
+$g-gutter:					24px !default;
+
+// naming of classes
+$g-row-class:				"row" !default;
+$g-col-class:				"col" !default;
+$g-class-delimiter:			"-" !default;
+$g-break-small-class:		"col-s" !default;
+$g-break-medium-class:		"col-m" !default;
+$g-break-large-class:		"col-l" !default;
+$g-break-small-prefix:		"s" !default;
+$g-break-medium-prefix:		"m" !default;
+$g-break-large-prefix:		"l" !default;
+
+//options
+$g-enable-breakpoints:		true !default;
+$g-enable-push-pull:		false !default;
+$g-enable-append:			false !default;
+$g-enable-prepend:			true !default;
+$g-enable-collapse:			true !default;
+$g-enable-center:			true !default;
+$g-enable-hide-column:		true !default;
+
+// custom columns
+$g-custom-cols: 			2 3 4 6 8 9 10 !default;
+$g-enable-custom-cols: 		false !default;
+
+// breakpoints
+$g-break-medium:			30em !default; // 480px
+$g-break-large:				64em !default; // 1024px
+
+
+// ===================================================
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+
+
+// mixins
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin center-column {
+	float: none;
+	display: inline-block;
+	text-align: left;
+	@if $g-enable-collapse == true {
+		margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
+	}
+}
+
+@mixin cols(
+	$default: false,
+	$num:false,
+	$break:false,
+	$push:false,
+	$pull:false,
+	$prepend:false,
+	$append:false ) {
+	
+	@if $default == true {
+		width: percentage(($num / $g-cols-count));
+		@if $g-enable-prepend == true {
+			margin-left: 0;
+		}
+		@if $g-enable-append == true {
+			margin-right: 0;
+		}
+	}
+
+	@if $push == true {
+		left: percentage(($num / $g-cols-count));
+		right: auto;
+	}
+
+	@if $pull == true {
+		left: - percentage(($num / $g-cols-count));
+		right: auto;
+	}
+
+	@if $prepend == true {
+		margin-left: percentage(($num / $g-cols-count));
+	}
+
+	@if $append == true {
+		margin-right: percentage(($num / $g-cols-count));
+	}
+
+	@if $g-debug == true and $default == true {
+		&:before {
+			@if $break == false {
+				content: $g-col-class + $g-class-delimiter + $num;
+			} @else {
+				content: $break + $g-class-delimiter + $num;
+			}
+			
+		}
+	}
+
+}
+
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+
+
+// set column list to iterate
+$g-col-list: 1;
+@if $g-enable-custom-cols == false {
+	@for $i from 2 through $g-cols-count {
+		$g-col-list: append($g-col-list, $i);
+	}
+} @else {
+	$g-col-list: $g-custom-cols;
+}
+
+
+
+// row
+.#{$g-row-class} {
+	@include clearfix();
+	width: 100%;
+	margin: 0 auto;	
+
+	.#{$g-row-class} {
+		margin-left: -($g-gutter/2);
+		margin-right: -($g-gutter/2);
+		max-width: none;
+		width: auto;
+	}
+
+}
+
+
+
+// col
+.#{$g-col-class} {
+	box-sizing: border-box;
+	min-height: 1px;
+	width: 100%;
+	float: left;
+	padding-left: ($g-gutter/2);
+	padding-right: ($g-gutter/2);
+	position: relative;
+	margin: 0;
+}
+
+
+// debug mode
+@if $g-debug == true {
+
+	body:after,
+	body:before,
+	.#{$g-col-class}:before {
+		content: "-";
+		position: absolute;
+		top: 0;
+		right: ($g-gutter/2);
+		display: inline-block;
+		background: firebrick;
+		color: #fff;
+		padding: 2px 5px;
+		font-size: 11px;
+		z-index: 9999;
+	}
+
+	body:after {
+		white-space: pre;
+		content: "CRIDS debug \a"
+				+ "============ \a"
+				+ "grid size: " + $g-cols-count + "\a"
+				+ "create cols: " + $g-col-list + "\a"
+				+ "breakpoints: " + $g-enable-breakpoints + "\a"
+				+ "--- \a"
+				+ "push-pull: " + $g-enable-push-pull + "\a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "pull" + $g-class-delimiter + "X, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "pull" + $g-class-delimiter + "X, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "pull" + $g-class-delimiter + "X \a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "push" + $g-class-delimiter + "X, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "push" + $g-class-delimiter + "X, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "push" + $g-class-delimiter + "X \a"
+				+ "--- \a"
+				+ "append: " + $g-enable-append + "\a"
+				+ ".append" + $g-class-delimiter + "X \a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "append" + $g-class-delimiter + "X, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "append" + $g-class-delimiter + "X, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "append" + $g-class-delimiter + "X \a"
+				+ "--- \a"
+				+ "prepend: " + $g-enable-prepend + "\a"
+				+ ".prepend" + $g-class-delimiter + "X \a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "prepend" + $g-class-delimiter + "X, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "prepend" + $g-class-delimiter + "X, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "prepend" + $g-class-delimiter + "X \a"
+				+ "--- \a"
+				+ "collapse: " + $g-enable-collapse + "\a"
+				+ ".collapse \a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "collapse, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "collapse, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "collapse \a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "uncollapse, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "uncollapse, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "uncollapse \a"
+				+ "--- \a"
+				+ "center: " + $g-enable-center + "\a"
+				+ ".center \a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "center, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "center, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "center \a"
+				+ "--- \a"
+				+ "hide-column: " + $g-enable-hide-column + "\a"
+				+ "." + $g-break-small-prefix + $g-class-delimiter + "hide, "
+				+ "." + $g-break-medium-prefix + $g-class-delimiter + "hide, "
+				+ "." + $g-break-large-prefix + $g-class-delimiter + "hide \a"
+				+ "============ \a"
+				+ "main classes \a"
+				+ "--- \a"
+				+ "." + $g-row-class + " (row/container) \a"
+				+ "." + $g-col-class + " (column) \a"
+
+				+ "." + $g-break-small-class + $g-class-delimiter + "X (small column) \a"
+				+ "." + $g-break-medium-class + $g-class-delimiter + "X (medium column) \a"
+				+ "." + $g-break-large-class + $g-class-delimiter + "X (large column) \a";
+		position: fixed;
+		right: 0;
+		padding: 10px;
+		opacity: .7;
+		z-index: 9998;
+	}
+
+	@if $g-enable-breakpoints == true {
+	
+		body:before {
+			position: fixed;
+			right: 0;
+			top: auto;
+			bottom: 0;
+		}
+
+		@media (max-width: $g-break-medium) {
+			body:before { content: "CRIDS viewport: small"; }
+		}
+
+		@media (min-width: $g-break-medium) and (max-width: $g-break-large) {
+			body:before { content: "CRIDS viewport: medium"; }
+		}
+
+		@media (min-width: $g-break-large) {
+			body:before { content: "CRIDS viewport: large"; }
+		}
+
+	}
+
+}
+
+
+
+// center, collapse/uncollapse
+@if $g-enable-center == true or $g-enable-collapse == true {
+
+	@if $g-enable-center == true {
+		// .row.center
+		.#{$g-row-class}.center {
+			text-align: center;
+
+			> .#{$g-col-class} {
+				@include center-column;
+			}
+		}
+	}
+
+	@if $g-enable-collapse == true {
+		// .row.collapse
+		.#{$g-row-class}.collapse > .#{$g-col-class} {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	@if $g-enable-breakpoints == true {
+
+		@media (max-width: $g-break-medium) {
+
+			@if $g-enable-center == true {
+				// .s-center
+				.#{$g-row-class}.#{$g-break-small-prefix}#{$g-class-delimiter}center {
+					text-align: center;
+
+					> [class*="#{$g-break-small-class}"] {
+						@include center-column;
+					}
+				}
+			}
+
+			@if $g-enable-collapse == true {
+				// .row.collapse.s-uncollapse > [class*=".col-s"]
+				.#{$g-row-class}.collapse.#{$g-break-small-prefix}#{$g-class-delimiter}uncollapse > [class*="#{$g-col-class}#{$g-class-delimiter}#{$g-break-small-prefix}#{$g-class-delimiter}"] {
+					padding-left: ($g-gutter/2);
+					padding-right: ($g-gutter/2);
+				}
+			}
+
+		}
+
+		@media (min-width: $g-break-medium) and (max-width: $g-break-large) {
+
+			@if $g-enable-center == true {
+				// .m-center
+				.#{$g-row-class}.#{$g-break-medium-prefix}#{$g-class-delimiter}center {
+					text-align: center;
+
+					> [class*="#{$g-break-medium-class}#{$g-class-delimiter}"] {
+						@include center-column;
+					}
+				}
+			}
+
+			@if $g-enable-collapse == true {
+				// .row.collapse.m-uncollapse > [class*=".col-"]
+				.#{$g-row-class}.collapse.#{$g-break-medium-prefix}#{$g-class-delimiter}uncollapse > [class*="#{$g-col-class}#{$g-class-delimiter}"] {
+					padding-left: ($g-gutter/2);
+					padding-right: ($g-gutter/2);
+				}
+			}
+
+		}
+
+		@media (min-width: $g-break-large) {
+
+			@if $g-enable-center == true {
+				// .l-center
+				.#{$g-row-class}.#{$g-break-large-prefix}#{$g-class-delimiter}center {
+					text-align: center;
+
+					> [class*="#{$g-break-large-class}#{$g-class-delimiter}"] {
+						@include center-column;
+					}
+				}
+			}
+
+			@if $g-enable-collapse == true {
+				// .row.collapse.l-uncollapse > [class*=".col-"]
+				.#{$g-row-class}.collapse.#{$g-break-large-prefix}#{$g-class-delimiter}uncollapse > [class*="#{$g-col-class}#{$g-class-delimiter}"] {
+					padding-left: ($g-gutter/2);
+					padding-right: ($g-gutter/2);
+				}
+			}
+
+		}
+
+	} @else {
+
+		@if $g-enable-collapse == true {
+			// .collapse.s-uncollapse > [class*=".col-s"]
+			.#{$g-row-class}.collapse.#{$g-break-small-prefix}#{$g-class-delimiter}uncollapse > [class*="#{$g-col-class}#{$g-class-delimiter}#{$g-break-small-class}"] {
+				padding-left: ($g-gutter/2);
+				padding-right: ($g-gutter/2);
+			}
+		}
+
+	}
+
+}
+
+
+// create grid columns
+@each $col in $g-col-list {
+	// .col-s-X
+	.#{$g-break-small-class}#{$g-class-delimiter}#{$col} { @include cols($default:true, $num:$col, $break:$g-break-small-class); }
+}
+
+@if $g-enable-breakpoints == true {
+
+	// break medium cols
+	@media (min-width: $g-break-medium) {
+		@each $col in $g-col-list {
+			// .col-m-X
+			.#{$g-break-medium-class}#{$g-class-delimiter}#{$col} { @include cols($default:true, $num:$col, $break:$g-break-medium-class); }
+		}
+	}
+
+	// break large cols
+	@media (min-width: $g-break-large) {
+		@each $col in $g-col-list {
+			// .col-l-X
+			.#{$g-break-large-class}#{$g-class-delimiter}#{$col} { @include cols($default:true, $num:$col, $break:$g-break-large-class); }
+		}
+	}
+
+}
+
+
+
+// push/pull, prepend, append, hide
+@if $g-enable-push-pull == true or $g-enable-prepend == true or $g-enable-append == true or $g-enable-hide-column == true {
+
+	@each $col in $g-col-list {
+
+		// create prepend classes if enabled
+		@if $g-enable-prepend == true {
+			// .prepend-X
+			.prepend#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $prepend:true); }
+		}
+		
+		// create append classes if enabled
+		@if $g-enable-append == true {
+			// .append-X
+			.append#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $append:true); }
+		}
+	}
+
+
+	@if $g-enable-breakpoints == true {
+
+		// just for small
+		@media (max-width: $g-break-medium) {
+			@each $col in $g-col-list {
+
+				// create push and pull classes if enabled
+				@if $g-enable-push-pull == true {
+					// .s-pull-X
+					.#{$g-break-small-prefix}#{$g-class-delimiter}pull#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $pull:true); }
+					// .s-push-X
+					.#{$g-break-small-prefix}#{$g-class-delimiter}push#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $push:true); }	
+				}
+
+				// create prepend classes if enabled
+				@if $g-enable-prepend == true {
+					// .s-prepend-X
+					.#{$g-break-small-prefix}#{$g-class-delimiter}prepend#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $prepend:true); }
+				}
+				
+				// create append classes if enabled
+				@if $g-enable-append == true {
+					// .s-append-X
+					.#{$g-break-small-prefix}#{$g-class-delimiter}append#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $append:true); }
+				}
+
+			}
+
+			@if $g-enable-hide-column == true {
+				// .s-hide
+				.#{$g-break-small-prefix}#{$g-class-delimiter}hide{ display: none !important; }
+			}
+
+		}
+
+		// medium range
+		@media (min-width: $g-break-medium) and (max-width: $g-break-large) {
+			@each $col in $g-col-list {
+
+				// create push and pull classes if enabled
+				@if $g-enable-push-pull == true {
+					// .m-pull-X
+					.#{$g-break-medium-prefix}#{$g-class-delimiter}pull#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-medium-class, $pull:true); }
+					// .m-push-X
+					.#{$g-break-medium-prefix}#{$g-class-delimiter}push#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-medium-class, $push:true); }	
+				}
+
+				// create prepend classes if enabled
+				@if $g-enable-prepend == true {
+					// .m-prepend-X
+					.#{$g-break-medium-prefix}#{$g-class-delimiter}prepend#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-medium-class, $prepend:true); }
+				}
+
+				// create append classes if enabled
+				@if $g-enable-append == true {
+					// .m-append-X
+					.#{$g-break-medium-prefix}#{$g-class-delimiter}append#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-medium-class, $append:true); }
+				}
+
+			}
+
+			@if $g-enable-hide-column == true {
+				// .m-hide
+				.#{$g-break-medium-prefix}#{$g-class-delimiter}hide{ display: none !important; }
+			}
+
+		}
+
+		// just for large
+		@media (min-width: $g-break-large) {
+			@each $col in $g-col-list {
+
+				// create push and pull classes if enabled
+				@if $g-enable-push-pull == true {
+					// .l-pull-X
+					.#{$g-break-large-prefix}#{$g-class-delimiter}pull#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-large-class, $pull:true); }
+					// .l-push-X
+					.#{$g-break-large-prefix}#{$g-class-delimiter}push#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-large-class, $push:true); }
+				}
+
+				// create prepend classes if enabled
+				@if $g-enable-prepend == true {
+					// .l-prepend-X
+					.#{$g-break-large-prefix}#{$g-class-delimiter}prepend#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-large-class, $prepend:true); }
+				}
+
+				// create append classes if enabled
+				@if $g-enable-append == true {
+					// .l-append-X
+					.#{$g-break-large-prefix}#{$g-class-delimiter}append#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-large-class, $append:true); }
+				}
+
+			}
+
+			@if $g-enable-hide-column == true {
+				// .l-hide
+				.#{$g-break-large-prefix}#{$g-class-delimiter}hide{ display: none !important; }
+			}
+
+		}
+
+
+	} @else {
+
+		@each $col in $g-col-list {
+
+			// create prepend classes if enabled
+			@if $g-enable-prepend == true {
+				//.s-prepend-X
+				.#{$g-break-small-prefix}#{$g-class-delimiter}prepend#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $prepend:true); }
+			}
+			
+			// create append classes if enabled
+			@if $g-enable-append == true {
+				// .s-append-X
+				.#{$g-break-small-prefix}#{$g-class-delimiter}append#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $append:true); }
+			}
+
+			// create push and pull classes if enabled
+			@if $g-enable-push-pull == true {
+				// .s-pull-X
+				.#{$g-break-small-prefix}#{$g-class-delimiter}pull#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $pull:true); }
+				// .s-push-X
+				.#{$g-break-small-prefix}#{$g-class-delimiter}push#{$g-class-delimiter}#{$col} { @include cols($default:false, $num:$col, $break:$g-break-small-class, $push:true); }	
+			}
+
+		}
+
+	}
+
+}
+
