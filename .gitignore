@@ -42,8 +42,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-#*.bat
-#*.rb
-#.sass-cache
+*.sass-cache
 *.bat
 config.rb
