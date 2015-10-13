@@ -6,39 +6,40 @@
 /**********************************************************/
 
 
-$g-debug:         false !default;
+$g-debug:                 false !default;
 
 // main grid settings
-$g-cols-count:        12 !default;
-$g-gutter:          24px !default;
+$g-cols-count:            12 !default;
+$g-gutter:                24px !default;
 
 // naming of classes
-$g-row-class:       "row" !default;
-$g-col-class:       "col" !default;
-$g-class-delimiter:     "-" !default;
-$g-break-small-class:   "col-s" !default;
+$g-row-class:             "row" !default;
+$g-col-class:             "col" !default;
+$g-class-delimiter:       "-" !default;
+$g-break-small-class:     "col-s" !default;
 $g-break-medium-class:    "col-m" !default;
-$g-break-large-class:   "col-l" !default;
+$g-break-large-class:     "col-l" !default;
 $g-break-small-prefix:    "s" !default;
 $g-break-medium-prefix:   "m" !default;
 $g-break-large-prefix:    "l" !default;
 
 //options
 $g-enable-breakpoints:    true !default;
-$g-enable-push-pull:    false !default;
-$g-enable-append:     false !default;
-$g-enable-prepend:      true !default;
-$g-enable-collapse:     true !default;
-$g-enable-center:     true !default;
+$g-enable-push-pull:      true !default;
+$g-enable-append:         true !default;
+$g-enable-prepend:        true !default;
+$g-enable-collapse:       true !default;
+$g-enable-center:         true !default;
 $g-enable-hide-column:    true !default;
 
 // custom columns
-$g-custom-cols:       2 3 4 6 8 9 10 !default;
+$g-custom-cols:           2 3 4 6 8 9 10 !default;
 $g-enable-custom-cols:    false !default;
 
 // breakpoints
-$g-break-medium:      30em !default; // 480px
-$g-break-large:       64em !default; // 1024px
+$g-break-medium:          30em !default; // 480px
+$g-break-large:           64em !default; // 1024px
+
 
 
 // ===================================================
