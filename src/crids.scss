@@ -51,20 +51,20 @@ $g-break-large:				64em !default; // 1024px
 
 // mixins
 @mixin clearfix {
-    &:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 
 @mixin center-column {
-	float: none;
-	display: inline-block;
-	text-align: left;
-	@if $g-enable-collapse == true {
-		margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
-	}
+  float: none;
+  display: inline-block;
+  text-align: left;
+  @if $g-enable-collapse == true {
+    margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
+  }
 }
 
 @mixin cols(
@@ -185,6 +185,11 @@ $g-col-list: 1;
 
 	body:after {
 		white-space: pre;
+    position: fixed;
+    right: 0;
+    padding: 10px;
+    opacity: .7;
+    z-index: 9998;
 		content: "CRIDS debug \a"
 				+ "============ \a"
 				+ "grid size: " + $g-cols-count + "\a"
@@ -239,21 +244,16 @@ $g-col-list: 1;
 				+ "." + $g-break-small-class + $g-class-delimiter + "X (small column) \a"
 				+ "." + $g-break-medium-class + $g-class-delimiter + "X (medium column) \a"
 				+ "." + $g-break-large-class + $g-class-delimiter + "X (large column) \a";
-		position: fixed;
-		right: 0;
-		padding: 10px;
-		opacity: .7;
-		z-index: 9998;
 	}
 
 	@if $g-enable-breakpoints == true {
 	
-		body:before {
-			position: fixed;
-			right: 0;
-			top: auto;
-			bottom: 0;
-		}
+    body:before {
+      position: fixed;
+      right: 0;
+      top: auto;
+      bottom: 0;
+    }
 
 		@media (max-width: $g-break-medium) {
 			body:before { content: "CRIDS viewport: small"; }
