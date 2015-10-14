@@ -66,9 +66,6 @@ $g-break-large:           64em !default; // 1024px
   float: none;
   display: inline-block;
   text-align: left;
-  @if $g-enable-collapse == true {
-    margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
-  }
 }
 
 
@@ -333,6 +330,13 @@ $g-col-list: 1;
 // center, collapse/uncollapse
 @if $g-enable-center == true or $g-enable-collapse == true {
 
+  @if $g-enable-center == true and $g-enable-collapse == true {
+    // .row.center.collapse > .col
+    .#{$g-row-class}.center.collapse > .#{$g-col-class} {
+      margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
+    }
+  }
+
   @if $g-enable-center == true {
     // .row.center
     .#{$g-row-class}.center {
@@ -355,6 +359,13 @@ $g-col-list: 1;
   @if $g-enable-breakpoints == true {
 
     @media (max-width: $g-break-medium) {
+
+      @if $g-enable-center == true and $g-enable-collapse == true {
+        // .row.s-center.collapse > .col
+        .#{$g-row-class}.#{$g-break-small-prefix}#{$g-class-delimiter}center.collapse > .#{$g-col-class} {
+          margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
+        }
+      }
 
       @if $g-enable-center == true {
         // .s-center
@@ -379,6 +390,13 @@ $g-col-list: 1;
 
     @media (min-width: $g-break-medium) and (max-width: $g-break-large) {
 
+      @if $g-enable-center == true and $g-enable-collapse == true {
+        // .row.m-center.collapse > .col
+        .#{$g-row-class}.#{$g-break-medium-prefix}#{$g-class-delimiter}center.collapse > .#{$g-col-class} {
+          margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
+        }
+      }
+
       @if $g-enable-center == true {
         // .m-center
         .#{$g-row-class}.#{$g-break-medium-prefix}#{$g-class-delimiter}center {
@@ -401,6 +419,13 @@ $g-col-list: 1;
     }
 
     @media (min-width: $g-break-large) {
+
+      @if $g-enable-center == true and $g-enable-collapse == true {
+        // .row.l-center.collapse > .col
+        .#{$g-row-class}.#{$g-break-large-prefix}#{$g-class-delimiter}center.collapse > .#{$g-col-class} {
+          margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
+        }
+      }
 
       @if $g-enable-center == true {
         // .l-center

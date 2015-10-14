@@ -210,6 +210,10 @@ table tbody tr:nth-of-type(odd) {
 .nav > li {
   display: inline-block;
 }
+.nav a {
+  padding: 5px 10px;
+  font-size: 14px;
+}
 
 .text-highlight {
   color: firebrick;
