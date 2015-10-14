@@ -171,6 +171,26 @@ $g-col-list: 1;
 // debug mode
 @if $g-debug == true {
 
+  .row {
+    position: relative;
+
+    &:before {
+      color: black;
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to left, orange 50%, black 50%);
+      background-size: percentage((2 / $g-cols-count)) 100%;
+      background-repeat: repeat-x;
+      opacity: .2;
+    }
+
+  }
+
   body:after,
   body:before,
   .#{$g-col-class}:before {
@@ -182,17 +202,23 @@ $g-col-list: 1;
     background: firebrick;
     color: #fff;
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     z-index: 9999;
+  }
+
+  .#{$g-col-class}:before {
+    z-index: 9997;
   }
 
   body:after {
     white-space: pre;
     position: fixed;
     right: 0;
-    padding: 10px;
+    padding: 5px;
     opacity: .7;
     z-index: 9998;
+    font-size: 11px;
+    line-height: 1.2;
     content: "CRIDS debug \a"
         + "============ \a"
         + "grid size: " + $g-cols-count + "\a"
