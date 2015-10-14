@@ -50,6 +50,7 @@ $g-break-large:           64em !default; // 1024px
 
 
 
+
 // mixins
 @mixin clearfix {
   &:after {
@@ -60,6 +61,7 @@ $g-break-large:           64em !default; // 1024px
 }
 
 
+
 @mixin center-column {
   float: none;
   display: inline-block;
@@ -68,6 +70,7 @@ $g-break-large:           64em !default; // 1024px
     margin: 0 -2px; // weird hack to remove whitespace between inline-block elements
   }
 }
+
 
 
 @mixin cols(
@@ -121,8 +124,21 @@ $g-break-large:           64em !default; // 1024px
 }
 
 
+
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+
+
+
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
+
 
 
 
@@ -168,6 +184,7 @@ $g-col-list: 1;
 }
 
 
+
 // debug mode
 @if $g-debug == true {
 
@@ -175,6 +192,7 @@ $g-col-list: 1;
     position: relative;
 
     &:before {
+      @include transition(opacity 0.4s ease);
       color: black;
       content: "";
       width: 100%;
@@ -186,7 +204,11 @@ $g-col-list: 1;
       background: linear-gradient(to left, orange 50%, black 50%);
       background-size: percentage((2 / $g-cols-count)) 100%;
       background-repeat: repeat-x;
-      opacity: .2;
+      opacity: .15;
+    }
+
+    &:hover:before {
+      opacity: .4;
     }
 
   }
@@ -211,11 +233,12 @@ $g-col-list: 1;
   }
 
   body:after {
+    @include transition(all 0.4s ease);
     white-space: pre;
     position: fixed;
-    right: 0;
+    right: -100px;
     padding: 5px;
-    opacity: .7;
+    opacity: 0;
     z-index: 9998;
     font-size: 11px;
     line-height: 1.2;
@@ -273,6 +296,11 @@ $g-col-list: 1;
         + "." + $g-break-small-class + $g-class-delimiter + "X (small column) \a"
         + "." + $g-break-medium-class + $g-class-delimiter + "X (medium column) \a"
         + "." + $g-break-large-class + $g-class-delimiter + "X (large column) \a";
+  }
+
+  body:hover:after {
+    opacity: 1;
+    right: 0;
   }
 
   @if $g-enable-breakpoints == true {
@@ -408,6 +436,7 @@ $g-col-list: 1;
   }
 
 }
+
 
 
 // create grid columns
@@ -588,4 +617,3 @@ $g-col-list: 1;
   }
 
 }
-
