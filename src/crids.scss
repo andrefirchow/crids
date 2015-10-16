@@ -45,8 +45,23 @@ $g-break-large:           64em !default; // 1024px
 
 // ===================================================
 //////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
+
+/*
+
+Example usage with default classnames
+
+<div class="row">
+  <div class="col col-s-6">content</div>
+  <div class="col col-s-6">content</div>
+</div>
+
+<div class="row center">
+  <div class="col col-s-5 col-m-4 col-large-3">content</div>
+  <div class="col col-s-5 col-m-4 col-large-3">content</div>
+</div>
+
+*/
+
 //////////////////////////////////////////////////////
 
 
@@ -131,11 +146,6 @@ $g-break-large:           64em !default; // 1024px
     transition: $args;
 }
 
-
-
-
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
 
 
 
