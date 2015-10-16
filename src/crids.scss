@@ -11,6 +11,7 @@ $g-debug:                 false !default;
 // main grid settings
 $g-cols-count:            12 !default;
 $g-gutter:                24px !default;
+$g-row-max-width:         false !default; // set a number (e.g. 1200px) or false to disable max-width
 
 // naming of classes
 $g-row-class:             "row" !default;
@@ -157,11 +158,19 @@ $g-col-list: 1;
   width: 100%;
   margin: 0 auto; 
 
+  @if $g-row-max-width != false {
+    max-width: $g-row-max-width;
+  }
+
   .#{$g-row-class} {
     margin-left: -($g-gutter/2);
     margin-right: -($g-gutter/2);
-    max-width: none;
     width: auto;
+
+    @if $g-row-max-width != false {
+      max-width: none;
+    }
+
   }
 
 }
@@ -242,6 +251,8 @@ $g-col-list: 1;
     content: "CRIDS debug \a"
         + "============ \a"
         + "grid size: " + $g-cols-count + "\a"
+        + "gutter: " + $g-gutter + "\a"
+        + "row max-width: " + $g-row-max-width + "\a"
         + "create cols: " + $g-col-list + "\a"
         + "breakpoints: " + $g-enable-breakpoints + "\a"
         + "--- \a"
